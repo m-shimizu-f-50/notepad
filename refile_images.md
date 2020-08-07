@@ -283,6 +283,7 @@ $('#stretch_stretch_images_images').on('change', function (e) {
 `app/views/stretchs/_stretchs_index.html.erb`
 
 <% if stretch.stretch_images.present? %>
+
 if文でストレッチの画像があることを確認している（.firstを記述してもエラーが起きない）
 
 <div class='stretch-image'>
