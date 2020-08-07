@@ -68,7 +68,6 @@ $(document).ready(function () {
 ⑦indexに画像フォームを作成
 
 `<%= form_for(stretch, url:"/admins/stretchs/#{stretch.id}") do |f| %>
-
     <div class='col-xs-6'>
 
       <%= f.label :image, class: 'image_label' do %>
@@ -82,6 +81,6 @@ $(document).ready(function () {
       <% end %>
 
       <%= f.attachment_field :image %>
-      
+
     </div>
 `
