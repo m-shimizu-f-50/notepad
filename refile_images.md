@@ -283,12 +283,15 @@ $('#stretch_stretch_images_images').on('change', function (e) {
 `app/views/stretchs/_stretchs_index.html.erb`
 
 <% if stretch.stretch_images.present? %>
+if文でストレッチの画像があることを確認している（.firstを記述してもエラーが起きない）
 
 <div class='stretch-image'>
 
 <%= link_to stretch_path(stretch),data: {"turbolinks" => false} do %>
 
 <%= attachment_image_tag stretch.stretch_images.first, :image, :fill, 500, 500 %>
+
+複数画像の最初の一枚だけ表示したいので.firstを記述
 
 <% end %>
 
