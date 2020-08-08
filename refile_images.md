@@ -22,24 +22,26 @@ StretchImageモデルには stretch_id(integer), image_id(string)
 
 `/app/models/stretch.rb`
 
->class Stretch < ApplicationRecord
->
-  >has_many :stretch_images, dependent: :destroy
->
-  >accepts_attachments_for :stretch_images, attachment: :image
-  >
->end
+```
+class Stretch < ApplicationRecord
+
+  has_many :stretch_images, dependent: :destroy
+
+  accepts_attachments_for :stretch_images, attachment: :image
+
+end
+```
 
 
 ## 4: controller 記述
 
->管理者側
+#### 管理者側
 
 `/app/controllers/stretches_controller.rb`
 
 
 
-
+```
 class Admins::StretchsController < ApplicationController
   before_action :authenticate_admin!
 
@@ -101,11 +103,12 @@ class Admins::StretchsController < ApplicationController
     )
     end
 end
+```
 
 
->会員側
+#### 会員側
 
-
+```
 class StretchsController < ApplicationController
 
   before_action :authenticate_user!
@@ -133,14 +136,14 @@ class StretchsController < ApplicationController
   end
 
 end
-
+```
 
 ## 5: View 記述
 
->管理者側
+#### 管理者側
 
 `/app/views/admins/stretchs/_form.html.erb`
-
+```
 <div class='row'>
   <%= form_for(stretch, url:"/admins/stretchs/#{stretch.id}") do |f| %>
 
@@ -196,36 +199,22 @@ end
 </div>
 
 
-`<script>`
+<script>
 
   <input type="file" id="myImage" accept="image/*">
-
 $('#stretch_stretch_images_images').on('change', function (e) {
-
   if(e.target.files.length > 5){
-
       alert('一度に投稿できるのは五枚までです。');
-
       // 選択したファイルをリセット
-
       document.getElementById("stretch_stretch_images_images").value = "";
-
       // 画像のプレビューが残っていた場合は、
-
       // リセットしないと選択できていると勘違いを誘発するため初期化。
-
       for( var i=0; i < 5; i++) {
-
         $(`#preview${i}`).attr('src', "");
-
       }
-
     }else{
-
       var reader = new Array(5);
-
       // 画像選択を二回した時、一回目より数が少なかったりすると画面上に残るので初期化
-
       for( var i=0; i < 5; i++) {
         $(`#preview${i}`).attr('src', "");
       }
@@ -244,156 +233,113 @@ $('#stretch_stretch_images_images').on('change', function (e) {
   }
 });
 </script>
-
->会員側
+```
+#### 会員側
 
 ` app/views/admins/stretchs/show.html.erb `
-
+```
 <% if @stretch.stretch_images.present? %>
-
   <% @stretch.stretch_images.each do |image| %>
-
    <%= attachment_image_tag image, :image, :fill, 200, 200 %>
-
   <% end %>
-
-  <% else %>
-
+<% else %>
   <%= image_tag 'no_image.jpg', size: '200x200' %>
-
 <% end %>
-
-
+```
 `app/views/favorites/_favorite.html.erb`
 
+```
 <% if favorite.stretch.stretch_images.present? %>
 
   <%= attachment_image_tag favorite.stretch.stretch_images.first, :image, :fill, 500, 500 , size: "300x300"%>
-
 <% end %>
+```
 
 `app/views/reviews/_review_index.html.erb `
-
+```
 <% if review.stretch.stretch_images.present? %>
 
   <%= attachment_image_tag review.stretch.stretch_images.first, :image, :fill, 500, 500, size: "300x300" %>
 
 <% end %>
+```
 
 `app/views/stretchs/_stretchs_index.html.erb`
-
+```
 <% if stretch.stretch_images.present? %>
-
 if文でストレッチの画像があることを確認している（.firstを記述してもエラーが起きない）
-
-<div class='stretch-image'>
-
-<%= link_to stretch_path(stretch),data: {"turbolinks" => false} do %>
-
-<%= attachment_image_tag stretch.stretch_images.first, :image, :fill, 500, 500 %>
-
-複数画像の最初の一枚だけ表示したいので.firstを記述
-
+  <div class='stretch-image'>
+  <%= link_to stretch_path(stretch),data: {"turbolinks" => false} do %>
+  <%= attachment_image_tag stretch.stretch_images.first, :image, :fill, 500, 500 %>
+  複数画像の最初の一枚だけ表示したいので.firstを記述
 <% end %>
-
-</div>
-
-<% end %>
-
+```
 
 `app/views/stretchs/show.html.erb`
 
+```
 <div class="sliderArea">
-
-          <div class="slider_thumb ">
-            <% @stretch.stretch_images.each do |image| %>
-              <%= attachment_image_tag image, :image, :fill, 500, 500 , size: "500x500"%>
-            <% end %>
-          </div>
-          <div class="thumb">
-            <% @stretch.stretch_images.each do |image| %>
-              <%= attachment_image_tag image, :image, :fill, 500, 500, size: "500x500"%>
-            <% end %>
-          </div>
-
+  <div class="slider_thumb ">
+    <% @stretch.stretch_images.each do |image| %>
+      <%= attachment_image_tag image, :image, :fill, 500, 500 , size: "500x500"%>
+    <% end %>
+  </div>
+  <div class="thumb">
+    <% @stretch.stretch_images.each do |image| %>
+      <%= attachment_image_tag image, :image, :fill, 500, 500, size: "500x500"%>
+  <% end %>
 </div>
 
-複数画像機能
-
-`<script>`
-
-  $(document).on('ready', function() {
-
+//複数画像機能
+<script>
+$(document).on('ready', function() {
   $('.slider_thumb').slick({
-
       arrows:false,
-
       asNavFor:'.thumb',
-
   });
-
   $('.thumb').slick({
-
       asNavFor:'.slider_thumb',
-
       focusOnSelect: true,
-
       slidesToShow:4,
-
       slidesToScroll:1
-
   });
-
 });
-
 </script>
-
+```
 
 ## 6: css 記述
 
 `app/assets/stylesheets/stretchs.scss `
 
+```
 /*複数画像*/
-
 .sliderArea {
-
     max-width: 100%;
     margin: 0 auto;
     padding: 0 25px;
 }
-
 .sliderArea.w300 {
-
     max-width: 300px;
 }
-
 .slick-slide {
-
     margin: 0 5px;
 }
-
 .slick-slide img {
-
     width: 100%;
     height: auto;
 }
-
 .slick-prev, .slick-next {
-
     z-index: 1;
 }
 .slick-prev:before, .slick-next:before {
-
     color: #000 !important;
 }
-
 .thumb {
-
     margin: 20px 0 0;
 }
 
 .thumb .slick-slide:hover {
-
     opacity: .7;
-} 
+}
+```
 
