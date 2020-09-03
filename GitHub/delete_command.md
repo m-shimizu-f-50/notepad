@@ -25,7 +25,7 @@ Git-git-checkoutドキュメント https://git-scm.com/docs/git-checkout
 ```
 $ git checkout 。
 ```
-##`git rm filename`：Gitで管理しているファイルを削除したい
+## `git rm filename`：Gitで管理しているファイルを削除したい
 
 `
 ＃ファイル指定
