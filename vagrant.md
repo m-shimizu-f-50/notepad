@@ -1,6 +1,6 @@
 # Vagrant コマンド一覧
 
-## リファレンス 
+## リファレンス
 * コマンド一覧表示
 ```
 $ vagrant list-commands
