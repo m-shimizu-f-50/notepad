@@ -15,7 +15,7 @@ Userは一つのお気に入りリスト(belongs_to)を持ち、favoriteは一�
 モデルに順番の概念を与えるために`acts_as_list`を使っています
 
 [GitHub - swanandp/acts_as_list](https://github.com/brendon/acts_as_list)
-
+`Gemfile`
 ```gem:gem
 gem 'acts_as_list'
 ```
@@ -24,18 +24,29 @@ $ bundle install
 ```
 `acts_as_list`がインストールできたら、favoriteにposition:integerのカラムを追加してください。
 
+`app/models/user.rb`
 ```models:app/models/user.rb
 class User < ApplicationRecord
   has_many :favorites, -> { order(position: :asc) }
   has_many :stretchs, dependent: :destroy
 end
 ```
+
+`app/models/favorite.rb`
 ```models:app/models/favorite.rb
 class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :stretch
   acts_as_list scope: :user
 end
+```
+
+`app/models/stretch.rb`
+```
+# お気に入り投稿と関連付け
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
+  belongs_to :user, optional: true
 ```
 これでfavoriteモデルに順番の概念を与えることができました。
 favoriteがcreateされるごとにpositionカラムにシーケンシャルな数字が自動で追加してくれます。
@@ -60,10 +71,11 @@ Sortable.jsでは`getElementByIdでHTMLObject`を取得することでリスト�
 
 ``` controller:users_controller.rb
 class UsersController < ApplicationController
-  @user = current_user
-    @reviews = Review.includes(:user, :stretch).where(user_id: @user.id).page(params[:page])
+  def show
+    @user = current_user
+    @reviews = Review.includes(:user, :stretch).where(user_id: @user.id).page(params[:page])  //ユーザーのレビュー一覧
     @favorite = Favorite.where('user_id = ?', @user)
-    @favorites = @user.favorites.page(params[:page])
+    @favorites = @user.favorites.page(params[:page])　　//お気に入りリスト
   end
 end
 ```
