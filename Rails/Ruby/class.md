@@ -9,6 +9,8 @@
 
 * クラスから実体化（インスタンス化）
 
+* 継承: クラスを引き継いで、新しいクラスを定義
+
 
 ## 簡単なクラスの作成
 ```
@@ -165,3 +167,139 @@ puts "合計金額は#{total}円です"
 
 
 
+## クラスの継承
+
+```
+# クラスを継承する
+
+class Box
+    def initialize(item)
+        @item = item
+    end
+
+    def open()
+        puts "宝箱を開いた。#{@item}を手に入れた。"
+    end
+end
+
+class JewelryBox < Box　　　　　　//Boxクラスを継承している
+    def look()
+        puts "宝箱はキラキラと輝いている。"
+    end
+end
+
+puts
+
+jewelrybox = JewelryBox.new("魔法の指輪")
+jewelrybox.look()
+jewelrybox.open()            //親クラスのopenメソッドが呼び出されている
+```
+[実行結果]
+```
+宝箱はキラキラと輝いている。
+宝箱を開いた。魔法の指輪を手に入れた。
+```
+
+
+## メソッドのオーバーライド
+
+### オーバーライドとは？
+オーバーライドを利用すると、親クラスが持つメソッドを子クラスで再定義して上書きすることができます。
+
+```
+# openメソッドのオーバーライド
+
+class Box
+    def initialize(item)
+        @item = item
+    end
+
+    def open()
+        puts "宝箱を開いた。#{@item}を手にいれた。"
+    end
+end
+
+class MagicBox < Box
+    def open()
+    //openメソッド再定義して更新している
+        puts "宝箱を開いた。#{@item}が襲いかかってきた！"
+    end
+end
+
+
+magicbox = MagicBox.new("モノマネモンスター")
+magicbox.look()
+magicbox.open()
+```
+
+[実行結果]
+```
+宝箱は美しく輝いている。
+宝箱が開いた。モノマネモンスターが襲いかかってきた！
+```
+
+
+## RPGでの攻撃シーン
+```
+# クラス変数とクラスメソッド
+
+class Player
+    
+    @@character_count = 0
+    def self.character_count()
+        @@character_count
+    end
+    def initialize(name)
+        @name = name
+        @@character_count += 1
+        puts "#{@@character_count}番目のプレイヤー、#{name}が登場した"
+    end
+
+    def attack(enemy)
+        puts "#{@name}は、#{enemy}を攻撃した！"
+    end
+end
+
+class Wizard < Player
+    def initialize()
+        super("魔法使い")
+    end
+
+    def attack(enemy)
+        spell()
+        puts "#{@name}は、#{enemy}に炎を放った！"
+    end
+
+    private
+
+    def spell()
+        puts "シャラララーン"
+    end
+end
+
+
+puts "=== パーティでスライムと戦う ==="
+hero   = Player.new("勇者")
+warrior = Player.new("戦士")
+wizard = Wizard.new()
+party = [hero, warrior, wizard]
+
+party.each do |player|
+    player.attack("スライム")
+end
+
+puts "#{Player.character_count()}人で、スライムを攻撃した"
+
+```
+[実行結果]
+```
+=== パーティでスライムと戦う ===
+1番目のプレイヤー、勇者が登場した
+2番目のプレイヤー、戦士が登場した
+3番目のプレイヤー、魔法使いが登場した
+勇者は、スライムを攻撃した！
+戦士は、スライムを攻撃した！
+シャラララーン
+魔法使いは、スライムに炎を放った！
+3人で、スライムを攻撃した
+```
