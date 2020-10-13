@@ -20,11 +20,6 @@ gvfdgdfgd
 
 
 
-時間はありますか？
-私の名前は清水雅人です
-本日はよろしくお願いします
-私の趣味はサッカーでasっdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsdファsファsdファsdファsdファsdファsdっfdfdさfdさsdっfdさsdfdさsdっfdさsdffdさsdfdさsdfdさsdfdさsdfdさsdfdさsdffdさsdffdさsdfdさsdfdさs
-
 
 
 
