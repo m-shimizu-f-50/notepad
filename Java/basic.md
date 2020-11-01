@@ -4,7 +4,7 @@
 public class Main {
   public static void main(String[] args) {
       if(条件式){
-         //条件式が成立した時の処理 
+         //条件式が成立した時の処理
       }
   }
 }
@@ -55,3 +55,33 @@ public class Main {
 - 数値： 1, 2, 3
 - 文字列： "hello","123"
 - 論理： true, false
+
+
+
+
+
+// whileによるループ処理
+
+public class Main {
+    public static void main(String[] args) {
+        // カウンタ変数の初期化
+        while (条件式) {
+            // 繰り返し処理
+            // カウンタ変数の更新
+        }
+    }
+}
+
+
+
+// forによるループ処理
+
+public class Main {
+    public static void main(String[] args) {
+        for(カウンタ変数の初期化; 条件式; カウンタ変数の更新) {
+             // 繰り返し処理
+        }
+    }
+}
+
+
