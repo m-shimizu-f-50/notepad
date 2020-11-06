@@ -1,6 +1,7 @@
 # if文による条件式
 
 // if文による条件分岐
+```
 public class Main {
   public static void main(String[] args) {
       if(条件式){
@@ -8,9 +9,9 @@ public class Main {
       }
   }
 }
-
+```
 例）
-// if文による条件分岐　else if
+```
 public class Main {
   public static void main(String[] args) {
     int number = 1;
@@ -21,8 +22,9 @@ public class Main {
     }
   }
 }
-
+```
 // if文による条件分岐　else if
+```
 public class Main {
     public static void main(String[] args) {
         int number = 1;
@@ -35,9 +37,11 @@ public class Main {
         }
     }
 }
+```
 
 例）
 // if文による条件分岐　else if
+```
 public class Main {
   public static void main(String[] args) {
     int number = 2;
@@ -50,7 +54,7 @@ public class Main {
     }
   }
 }
-
+```
 # 主なデータの種類
 - 数値： 1, 2, 3
 - 文字列： "hello","123"
@@ -61,7 +65,7 @@ public class Main {
 
 
 // whileによるループ処理
-
+```
 public class Main {
     public static void main(String[] args) {
         // カウンタ変数の初期化
@@ -72,10 +76,10 @@ public class Main {
     }
 }
 
-
+```
 
 // forによるループ処理
-
+```
 public class Main {
     public static void main(String[] args) {
         for(カウンタ変数の初期化; 条件式; カウンタ変数の更新) {
@@ -83,5 +87,21 @@ public class Main {
         }
     }
 }
-
-
+```
+// forによるループ処理
+```
+public class Main {
+    public static void main(String[] args) {
+        for(int i = 0; i<=2; i++) {
+             System.out.println("hello wold");
+        }
+    }
+}
+```
+//拡張for文による配列のループ処理
+```
+String[] team = {"勇者", "戦士", "魔法使い", "忍者"};
+for (String member : team) {
+    System.out.println(member);
+}
+```
