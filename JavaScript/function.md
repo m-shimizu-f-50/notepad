@@ -116,9 +116,25 @@ console.log(sum);
 ５
 ```
 
+# よく使用する関数(function)
 
+参考記事：[MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript)
 
+##文字列　String
 
+```
+string.length  長さ
+string.indexOf()  検索（位置）
+string.slice()  取り出し
+string.substring()  ◯文字目から◯文字だけ取り出す
+string.split() 分割
+string.concat()  連結
+string.trim()  両端から空白などを取り除く
+string.startsWith()  指定文字列で始めるか
+string.includes() 検索（含まれているか）
+string.toLowerCase() 小文字に変換
+string.replace() 置き換え
+```
 
 
 
